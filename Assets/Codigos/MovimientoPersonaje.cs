@@ -4,21 +4,32 @@ using UnityEngine;
 
 public class MovimientoPersonaje : MonoBehaviour
 {
-    public float velocidadMovimiento = 5f;
-    public Vector2 posicionInicial;
-    public float fuerzaSalto = 7f;
-    private bool enElsuelo = false;
+    [SerializeField] public float velocidadMovimiento = 5.0f;
+    [SerializeField] public Vector2 posicionInicial;
+    [SerializeField] public float fuerzaSalto = 7.0f;
+    [SerializeField] public bool enElSuelo = false;
+    [SerializeField] public bool enElAgua = false;
 
-    private int muertesAcumuladas = 0;
+    [SerializeField] private int muertesAcumuladas = 0;
+    [SerializeField] public int puntosAcumulados = 0;
+    [SerializeField] public int puntosDesplegados = 0;
+
+    [SerializeField] public float intensidadMaximaDeLaLuz;
+    [SerializeField] public float intensidadMinimaDeLaLuz;
 
     private Rigidbody2D cuerpoRigido;
     private Animator animaciones;
 
+    [SerializeField] public UnityEngine.Rendering.Universal.Light2D luzGlobal;
+
     void Awake()
     {
+        intensidadMaximaDeLaLuz = 2.0f;
+        intensidadMinimaDeLaLuz = 0.2f;
         cuerpoRigido = GetComponent<Rigidbody2D>();   
         animaciones = GetComponent<Animator>();
         posicionInicial = transform.position;
+        puntosDesplegados = GameObject.FindGameObjectsWithTag("Coleccionable").Length;
     }
 
     void Update()
@@ -26,10 +37,10 @@ public class MovimientoPersonaje : MonoBehaviour
         float movimientoHorizontal = Input.GetAxis("Horizontal");
         cuerpoRigido.velocity = new Vector2(movimientoHorizontal * velocidadMovimiento, cuerpoRigido.velocity.y);
 
-        if (Input.GetButtonDown("Jump") && enElsuelo)
+        if (Input.GetButtonDown("Jump") && (enElSuelo || enElAgua))
         {
             cuerpoRigido.AddForce(new Vector2(0f, fuerzaSalto), ForceMode2D.Impulse);
-            enElsuelo = false;
+            enElSuelo = false;
         }
 
         if (movimientoHorizontal > 0)
@@ -38,18 +49,29 @@ public class MovimientoPersonaje : MonoBehaviour
             transform.localScale = new Vector3(-1, 1, 1);
 
         animaciones.SetInteger("Salto", (int) cuerpoRigido.velocity.y);
-        animaciones.SetBool("Piso", enElsuelo);
+        animaciones.SetBool("Piso", enElSuelo);
 
-        if(enElsuelo)
+        if(enElSuelo)
             animaciones.SetFloat("MovimientoHorizontal", Mathf.Abs(movimientoHorizontal));
     }
 
     void OnCollisionEnter2D (Collision2D collision)
     {
-        enElsuelo = collision.gameObject.CompareTag("Suelo");
+        enElSuelo = collision.gameObject.CompareTag("Suelo");
 
         if (collision.gameObject.CompareTag("Morir"))
             Reinicio();
+    }
+
+    void OnTriggerEnter2D(Collider2D other) {
+        enElAgua = other.gameObject.CompareTag("Agua");
+    }
+
+    private void OnTriggerExit2D(Collider2D other) {
+        if (other.gameObject.CompareTag("Agua"))
+        {
+            enElAgua = false;
+        };
     }
 
     void Reinicio()
@@ -61,6 +83,15 @@ public class MovimientoPersonaje : MonoBehaviour
         cuerpoRigido.bodyType = RigidbodyType2D.Dynamic;
         muertesAcumuladas++;
         Debug.Log(muertesAcumuladas);
+    }
+
+    public void Iluminar()
+    {
+        puntosAcumulados++;
+        float intensidadPorLuz = (intensidadMaximaDeLaLuz - intensidadMinimaDeLaLuz) / puntosDesplegados;
+        luzGlobal.intensity = 0.2f + (intensidadPorLuz * puntosAcumulados);
+
+//        luzGlobal.intensity = 1 + (luz * porcentajeLuz / 100);
     }
 }
 
