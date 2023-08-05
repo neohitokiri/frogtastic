@@ -73,6 +73,12 @@ public class MovimientoPersonaje : MonoBehaviour
             enElAgua = false;
         };
     }
+    private void OnTriggerStay2D(Collider2D other) {
+        if (other.gameObject.CompareTag("Agua"))
+        {
+            enElAgua = true;
+        };
+    }
 
     void Reinicio()
     {
