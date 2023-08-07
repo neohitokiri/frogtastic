@@ -34,5 +34,5 @@ El videojuego es un plataformero 2D en el que el jugador controla a un personaje
 ## Plataformas
 - El juego estará disponible para sistemas operativos Windows, macOS y Linux.
 
-## Equipo de Desarrollo
+## Equipo de Desarrollo
 - Javier Leonardo Cerón Puentes.
