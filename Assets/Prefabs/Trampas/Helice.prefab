@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 554169391180094669}
   - component: {fileID: 7935089065146199128}
   - component: {fileID: 307828308538026763}
+  - component: {fileID: 525102366951644981}
   m_Layer: 0
   m_Name: Helice
   m_TagString: Morir
@@ -107,6 +108,7 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
 --- !u!61 &7935089065146199128
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -120,7 +122,7 @@ BoxCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 0}
+  m_Offset: {x: 0.030550838, y: 0.1400249}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
@@ -131,7 +133,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 1.5, y: 0.5}
+  m_Size: {x: 1.4388983, y: 0.2199502}
   m_EdgeRadius: 0
 --- !u!50 &307828308538026763
 Rigidbody2D:
@@ -154,3 +156,41 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 0
+--- !u!114 &525102366951644981
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3168218762224593505}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7db70e0ea77f5ac47a8f4565a9406397, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_ShadowGroup: 0
+  m_ComponentVersion: 1
+  m_HasRenderer: 1
+  m_UseRendererSilhouette: 1
+  m_CastsShadows: 1
+  m_SelfShadows: 1
+  m_ApplyToSortingLayers: 00000000
+  m_ShapePath:
+  - {x: -0.6888981, y: 0.0147743225, z: 0}
+  - {x: -0.6888981, y: 0.19908178, z: 0}
+  - {x: 0.7449081, y: 0.21944892, z: 0}
+  - {x: 0.7449081, y: 0.019866109, z: 0}
+  - {x: 0.10692835, y: 0.02291298, z: 0}
+  - {x: 0.112020016, y: -0.119657755, z: 0}
+  - {x: 0.21385622, y: -0.119657755, z: 0}
+  - {x: 0.21894813, y: -0.24695313, z: 0}
+  - {x: -0.15784621, y: -0.25713682, z: 0}
+  - {x: -0.15784621, y: -0.119657755, z: 0}
+  - {x: -0.04073453, y: -0.119657755, z: 0}
+  - {x: -0.04073429, y: 0.02291298, z: 0}
+  m_ShapePathHash: -1010035779
+  m_Mesh: {fileID: 0}
+  m_InstanceId: 61934
+  m_LocalBounds:
+    m_Center: {x: 0.028005004, y: -0.018843949, z: 0}
+    m_Extent: {x: 0.7169031, y: 0.23829287, z: 0}

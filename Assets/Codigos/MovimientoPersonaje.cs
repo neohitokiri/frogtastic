@@ -57,7 +57,8 @@ public class MovimientoPersonaje : MonoBehaviour
 
     void OnCollisionEnter2D (Collision2D collision)
     {
-        enElSuelo = collision.gameObject.CompareTag("Suelo");
+        if (collision.gameObject.CompareTag("Suelo"))
+            enElSuelo = true;
 
         if (collision.gameObject.CompareTag("Morir"))
             Reinicio();

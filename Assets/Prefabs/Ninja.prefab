@@ -50,8 +50,8 @@ MonoBehaviour:
   m_FalloffIntensity: 0.5
   m_Color: {r: 0.44850504, g: 0.8679245, b: 0.33980063, a: 1}
   m_Intensity: 1
-  m_LightVolumeIntensity: 1
-  m_LightVolumeIntensityEnabled: 0
+  m_LightVolumeIntensity: 0.3
+  m_LightVolumeIntensityEnabled: 1
   m_ApplyToSortingLayers: 00000000
   m_LightCookieSprite: {fileID: 0}
   m_DeprecatedPointLightCookieSprite: {fileID: 0}
@@ -59,12 +59,12 @@ MonoBehaviour:
   m_AlphaBlendOnOverlap: 0
   m_OverlapOperation: 0
   m_NormalMapDistance: 3
-  m_NormalMapQuality: 2
+  m_NormalMapQuality: 1
   m_UseNormalMap: 0
   m_ShadowIntensityEnabled: 1
   m_ShadowIntensity: 0.75
   m_ShadowVolumeIntensityEnabled: 0
-  m_ShadowVolumeIntensity: 0.75
+  m_ShadowVolumeIntensity: 0.265
   m_LocalBounds:
     m_Center: {x: 0, y: -0.00000011920929, z: 0}
     m_Extent: {x: 0.9985302, y: 0.99853027, z: 0}
@@ -97,6 +97,7 @@ GameObject:
   - component: {fileID: 5791354100108125455}
   - component: {fileID: 5791354100108125454}
   - component: {fileID: -4647920036916413487}
+  - component: {fileID: 8852077216358006318}
   m_Layer: 0
   m_Name: Ninja
   m_TagString: Untagged
@@ -245,8 +246,14 @@ MonoBehaviour:
   velocidadMovimiento: 5
   posicionInicial: {x: 0, y: 0}
   fuerzaSalto: 12
+  enElSuelo: 0
+  enElAgua: 0
+  muertesAcumuladas: 0
   puntosAcumulados: 0
-  globalLight2D: {fileID: 0}
+  puntosDesplegados: 0
+  intensidadMaximaDeLaLuz: 0
+  intensidadMinimaDeLaLuz: 0
+  luzGlobal: {fileID: 0}
 --- !u!81 &-4647920036916413487
 AudioListener:
   m_ObjectHideFlags: 0
@@ -255,3 +262,48 @@ AudioListener:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5791354100108125684}
   m_Enabled: 1
+--- !u!114 &8852077216358006318
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5791354100108125684}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7db70e0ea77f5ac47a8f4565a9406397, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_ShadowGroup: 0
+  m_ComponentVersion: 1
+  m_HasRenderer: 1
+  m_UseRendererSilhouette: 1
+  m_CastsShadows: 1
+  m_SelfShadows: 0
+  m_ApplyToSortingLayers: 00000000
+  m_ShapePath:
+  - {x: -0.19882774, y: -0.48174715, z: 0}
+  - {x: -0.18481016, y: -0.3445226, z: 0}
+  - {x: -0.30801678, y: -0.33539617, z: 0}
+  - {x: -0.23956871, y: -0.23044229, z: 0}
+  - {x: -0.2760744, y: -0.16655731, z: 0}
+  - {x: -0.28063774, y: -0.04335046, z: 0}
+  - {x: -0.34452248, y: -0.011408091, z: 0}
+  - {x: -0.34941387, y: 0.2535863, z: 0}
+  - {x: 0.3037815, y: 0.2444601, z: 0}
+  - {x: 0.33995962, y: 0.015971184, z: 0}
+  - {x: 0.3353963, y: -0.17112052, z: 0}
+  - {x: 0.2623849, y: -0.21675265, z: 0}
+  - {x: 0.3353963, y: -0.35821223, z: 0}
+  - {x: 0.24413204, y: -0.36733866, z: 0}
+  - {x: 0.2170806, y: -0.49087358, z: 0}
+  - {x: 0.116362095, y: -0.48598218, z: 0}
+  - {x: 0.13005161, y: -0.39471793, z: 0}
+  - {x: -0.0661664, y: -0.40384436, z: 0}
+  - {x: -0.1026721, y: -0.4951086, z: 0}
+  m_ShapePathHash: -181906473
+  m_Mesh: {fileID: 0}
+  m_InstanceId: 68978
+  m_LocalBounds:
+    m_Center: {x: -0.004727125, y: -0.120761156, z: 0}
+    m_Extent: {x: 0.34468675, y: 0.37434745, z: 0}

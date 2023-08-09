@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 1269627773959100702}
   - component: {fileID: 7036761898430901866}
   - component: {fileID: 5307324082215549320}
+  - component: {fileID: 2467518460568161820}
   m_Layer: 0
   m_Name: Chuzos
   m_TagString: Morir
@@ -99,7 +100,7 @@ BoxCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0, y: -0.21648847}
+  m_Offset: {x: -0.02846706, y: -0.25512248}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
@@ -110,7 +111,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 0.8888889, y: 0.4559119}
+  m_Size: {x: 0.8319547, y: 0.37864387}
   m_EdgeRadius: 0
 --- !u!50 &5307324082215549320
 Rigidbody2D:
@@ -133,3 +134,35 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 0
+--- !u!114 &2467518460568161820
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3838845846750208335}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7db70e0ea77f5ac47a8f4565a9406397, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_ShadowGroup: 0
+  m_ComponentVersion: 1
+  m_HasRenderer: 1
+  m_UseRendererSilhouette: 1
+  m_CastsShadows: 1
+  m_SelfShadows: 0
+  m_ApplyToSortingLayers: 00000000
+  m_ShapePath:
+  - {x: -0.44444466, y: -0.44444445, z: 0}
+  - {x: -0.24924088, y: -0.047631036, z: 0}
+  - {x: -0.06913471, y: -0.429041, z: 0}
+  - {x: 0, y: -0.43717453, z: 0}
+  - {x: 0.2004404, y: -0.04356432, z: 0}
+  - {x: 0.3875103, y: -0.44444445, z: 0}
+  m_ShapePathHash: 1213329089
+  m_Mesh: {fileID: 0}
+  m_InstanceId: 61190
+  m_LocalBounds:
+    m_Center: {x: -0.028467178, y: -0.24400438, z: 0}
+    m_Extent: {x: 0.41597748, y: 0.20044006, z: 0}
