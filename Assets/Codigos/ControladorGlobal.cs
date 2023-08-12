@@ -2,19 +2,22 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class ControladorGlobal : MonoBehaviour
+public static class ControladorGlobal
 {
     
+    [SerializeField] public static int idDelCheckpointActual;
+    [SerializeField] public static bool cambiarCheckpoint;
 
-    // Start is called before the first frame update
-    void Start()
+    // Actualiza el punto de guardado, retorna el ID del anterior punto
+    public static int ActivarPuntoDeGuardado(int nuevoId)
     {
-        
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
+        int paraRetornar = idDelCheckpointActual;
+        if (nuevoId != idDelCheckpointActual)
+        {
+            Debug.Log("Reemplazando " + idDelCheckpointActual + " por " + nuevoId);
+            idDelCheckpointActual = nuevoId;
+            cambiarCheckpoint = true;
+        }
+        return paraRetornar;
     }
 }

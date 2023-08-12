@@ -36,3 +36,17 @@ El videojuego es un plataformero 2D en el que el jugador controla a un personaje
 
 ## Equipo de Desarrollo
 - Javier Leonardo Cerón Puentes.
+
+## Información de iluminación y consumo
+- https://www.barcelonaled.com/blog/informacion-led/que-son-los-lumenes-y-para-que-sirven
+
+| Bombillas Incandescentes en Watts | Equivalencia LED en Lúmenes | Equivalencia LED en Watts |
+|-----------------------------------|-----------------------------|---------------------------|
+| 25W                               | 250lm                       | 4-9W                      |
+| 40W                               | 450lm                       | 9-13W                     |
+| 60W                               | 800lm                       | 13-15W                    |
+| 75W                               | 1110lm                      | 18-25W                    |
+| 100W                              | 1600lm                      | 23-30W                    |
+| 125W                              | 2000lm                      | 32-40W                    |
+| 150W                              | 2600lm                      | 40-45W                    |
+

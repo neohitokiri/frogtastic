@@ -20,7 +20,17 @@ public class MovimientoPersonaje : MonoBehaviour
     private Rigidbody2D cuerpoRigido;
     private Animator animaciones;
 
+    private AudioSource sonidoSalto;
+
     [SerializeField] public UnityEngine.Rendering.Universal.Light2D luzGlobal;
+
+    private void Start() {
+        foreach(Transform child in transform)
+        {
+            if (child.gameObject.name == "SonidoSalto")
+                sonidoSalto = child.gameObject.GetComponent<AudioSource>();
+        }
+    }
 
     void Awake()
     {
@@ -41,6 +51,7 @@ public class MovimientoPersonaje : MonoBehaviour
         {
             cuerpoRigido.AddForce(new Vector2(0f, fuerzaSalto), ForceMode2D.Impulse);
             enElSuelo = false;
+            sonidoSalto.Play();
         }
 
         if (movimientoHorizontal > 0)

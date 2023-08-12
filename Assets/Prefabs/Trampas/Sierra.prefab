@@ -178,7 +178,7 @@ MonoBehaviour:
   - {x: -0.00037304312, y: -0.38980904, z: 0}
   m_ShapePathHash: -1227915852
   m_Mesh: {fileID: 0}
-  m_InstanceId: 67134
+  m_InstanceId: 51150
   m_LocalBounds:
     m_Center: {x: 0.006466657, y: 0.009172648, z: 0}
     m_Extent: {x: 0.40354148, y: 0.3989817, z: 0}
@@ -195,7 +195,7 @@ AudioSource:
   m_audioClip: {fileID: 8300000, guid: 7d7017a5a1024b40d81979007fdf3b48, type: 3}
   m_PlayOnAwake: 1
   m_Volume: 1
-  m_Pitch: 0
+  m_Pitch: 2
   Loop: 1
   Mute: 0
   Spatialize: 0
@@ -203,7 +203,7 @@ AudioSource:
   Priority: 120
   DopplerLevel: 0.25
   MinDistance: 1
-  MaxDistance: 100
+  MaxDistance: 11
   Pan2D: 0
   rolloffMode: 2
   BypassEffects: 0
