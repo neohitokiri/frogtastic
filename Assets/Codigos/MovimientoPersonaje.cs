@@ -17,10 +17,14 @@ public class MovimientoPersonaje : MonoBehaviour
     [SerializeField] public float intensidadMaximaDeLaLuz;
     [SerializeField] public float intensidadMinimaDeLaLuz;
 
+    [SerializeField] private ParticleSystem particulas;
+    [SerializeField] private ParticleSystem particulasMuerte;
+
     private Rigidbody2D cuerpoRigido;
     private Animator animaciones;
 
     private AudioSource sonidoSalto;
+    private AudioSource sonidoMuerte;
 
     [SerializeField] public UnityEngine.Rendering.Universal.Light2D luzGlobal;
 
@@ -29,6 +33,12 @@ public class MovimientoPersonaje : MonoBehaviour
         {
             if (child.gameObject.name == "SonidoSalto")
                 sonidoSalto = child.gameObject.GetComponent<AudioSource>();
+            if (child.gameObject.name == "SonidoMuerte")
+                sonidoMuerte = child.gameObject.GetComponent<AudioSource>();
+            else if (child.gameObject.name == "Particulas")
+                particulas = child.gameObject.GetComponent<ParticleSystem>();
+            else if (child.gameObject.name == "ParticulasMuerte")
+                particulasMuerte = child.gameObject.GetComponent<ParticleSystem>();
         }
     }
 
@@ -52,6 +62,12 @@ public class MovimientoPersonaje : MonoBehaviour
             cuerpoRigido.AddForce(new Vector2(0f, fuerzaSalto), ForceMode2D.Impulse);
             enElSuelo = false;
             sonidoSalto.Play();
+            particulas.Play();
+        }
+
+        if (Input.GetKey(KeyCode.Escape))
+        {
+            Application.Quit();
         }
 
         if (movimientoHorizontal > 0)
@@ -71,8 +87,21 @@ public class MovimientoPersonaje : MonoBehaviour
         if (collision.gameObject.CompareTag("Suelo"))
             enElSuelo = true;
 
+        if (collision.gameObject.CompareTag("PlataformaMovil"))
+        {
+            enElSuelo = true;
+            transform.parent = collision.transform;
+        }
+
         if (collision.gameObject.CompareTag("Morir"))
             Reinicio();
+    }
+
+    private void OnCollisionExit2D(Collision2D other) {
+        if (other.gameObject.CompareTag("PlataformaMovil"))
+        {
+            transform.parent = null;
+        }
     }
 
     void OnTriggerEnter2D(Collider2D other) {
@@ -94,10 +123,15 @@ public class MovimientoPersonaje : MonoBehaviour
 
     void Reinicio()
     {
+        sonidoMuerte.Play();
         transform.position = posicionInicial;
         cuerpoRigido.velocity = Vector2.zero;
         cuerpoRigido.angularVelocity = 0;
         cuerpoRigido.bodyType = RigidbodyType2D.Static;
+        // Partículas para indicar muerte
+        particulasMuerte.transform.position = transform.position;
+        particulasMuerte.Play();
+
         cuerpoRigido.bodyType = RigidbodyType2D.Dynamic;
         muertesAcumuladas++;
         Debug.Log(muertesAcumuladas);
@@ -111,5 +145,17 @@ public class MovimientoPersonaje : MonoBehaviour
 
 //        luzGlobal.intensity = 1 + (luz * porcentajeLuz / 100);
     }
+
+        void Quit()
+        {
+            #if UNITY_EDITOR
+                // Application.Quit() does not work in the editor so
+                // UnityEditor.EditorApplication.isPlaying need to be
+                // set to false to end the game.
+                UnityEditor.EditorApplication.isPlaying = false;
+            #else
+                Application.Quit();
+            #endif
+        }
 }
 

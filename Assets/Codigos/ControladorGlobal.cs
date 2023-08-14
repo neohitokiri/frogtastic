@@ -20,4 +20,14 @@ public static class ControladorGlobal
         }
         return paraRetornar;
     }
+
+    public static void Salir()
+    {
+        // https://docs.unity3d.com/Manual/PlatformDependentCompilation.html
+        #if UNITY_EDITOR || UNITY_EDITOR_WIN || UNITY_EDITOR_OSX || UNITY_EDITOR_LINUX
+            UnityEditor.EditorApplication.isPlaying = false;
+        #else
+            Application.Quit();
+        #endif
+    }
 }
