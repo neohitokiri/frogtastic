@@ -33,4 +33,9 @@ public class Interfaces : MonoBehaviour
     {
         ControladorGlobal.Salir();
     }
+
+    public void ReiniciarValores()
+    {
+        ControladorGlobal.Instance.ReiniciarValores();
+    }
 }

@@ -10,7 +10,7 @@ public class MovimientoPersonaje : MonoBehaviour
     [SerializeField] public bool enElSuelo = false;
     [SerializeField] public bool enElAgua = false;
 
-    [SerializeField] private int muertesAcumuladas = 0;
+//    [SerializeField] private int muertesAcumuladas = 0;
     [SerializeField] public int puntosAcumulados = 0;
     [SerializeField] public int puntosDesplegados = 0;
 
@@ -67,7 +67,8 @@ public class MovimientoPersonaje : MonoBehaviour
 
         if (Input.GetKey(KeyCode.Escape))
         {
-            Application.Quit();
+            UnityEngine.SceneManagement.SceneManager.LoadScene(0);
+//            Application.Quit();
         }
 
         if (movimientoHorizontal > 0)
@@ -133,8 +134,9 @@ public class MovimientoPersonaje : MonoBehaviour
         particulasMuerte.Play();
 
         cuerpoRigido.bodyType = RigidbodyType2D.Dynamic;
-        muertesAcumuladas++;
-        Debug.Log(muertesAcumuladas);
+        ControladorGlobal.Instance.IncrementarMuertes();
+//        muertesAcumuladas++;
+        Debug.Log(ControladorGlobal.Instance.muertesAcumuladas);
     }
 
     public void Iluminar()
@@ -146,16 +148,4 @@ public class MovimientoPersonaje : MonoBehaviour
 //        luzGlobal.intensity = 1 + (luz * porcentajeLuz / 100);
     }
 
-        void Quit()
-        {
-            #if UNITY_EDITOR
-                // Application.Quit() does not work in the editor so
-                // UnityEditor.EditorApplication.isPlaying need to be
-                // set to false to end the game.
-                UnityEditor.EditorApplication.isPlaying = false;
-            #else
-                Application.Quit();
-            #endif
-        }
 }
-
