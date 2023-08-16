@@ -11,8 +11,8 @@ public class MovimientoPersonaje : MonoBehaviour
     [SerializeField] public bool enElAgua = false;
 
 //    [SerializeField] private int muertesAcumuladas = 0;
-    [SerializeField] public int puntosAcumulados = 0;
-    [SerializeField] public int puntosDesplegados = 0;
+//    [SerializeField] public int puntosAcumulados = 0;
+//    [SerializeField] public int puntosDesplegados = 0;
 
     [SerializeField] public float intensidadMaximaDeLaLuz;
     [SerializeField] public float intensidadMinimaDeLaLuz;
@@ -51,7 +51,7 @@ public class MovimientoPersonaje : MonoBehaviour
         cuerpoRigido = GetComponent<Rigidbody2D>();   
         animaciones = GetComponent<Animator>();
         posicionInicial = transform.position;
-        puntosDesplegados = GameObject.FindGameObjectsWithTag("Coleccionable").Length;
+        ControladorGlobal.SetTotalColeccionables(GameObject.FindGameObjectsWithTag("Coleccionable").Length);
     }
 
     void Update()
@@ -141,13 +141,13 @@ public class MovimientoPersonaje : MonoBehaviour
         Debug.Log(ControladorGlobal.Instance.muertesAcumuladas);
     }
 
-    public void Iluminar()
-    {
-        puntosAcumulados++;
-        float intensidadPorLuz = (intensidadMaximaDeLaLuz - intensidadMinimaDeLaLuz) / puntosDesplegados;
-        luzGlobal.intensity = 0.2f + (intensidadPorLuz * puntosAcumulados);
+//    public void Iluminar()
+//    {
+//        puntosAcumulados++;
+//        float intensidadPorLuz = (intensidadMaximaDeLaLuz - intensidadMinimaDeLaLuz) / puntosDesplegados;
+//        luzGlobal.intensity = 0.2f + (intensidadPorLuz * puntosAcumulados);
 
-//        luzGlobal.intensity = 1 + (luz * porcentajeLuz / 100);
-    }
+////        luzGlobal.intensity = 1 + (luz * porcentajeLuz / 100);
+//    }
 
 }

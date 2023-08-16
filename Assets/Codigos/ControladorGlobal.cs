@@ -5,6 +5,12 @@ using UnityEngine.SceneManagement;
 
 public class ControladorGlobal : MonoBehaviour
 {
+    [SerializeField] public static int idDelCheckpointActual;
+    [SerializeField] public static bool cambiarCheckpoint;
+    [SerializeField] public bool NivelFinalizado;
+    [SerializeField] public int muertesAcumuladas;
+    [SerializeField] private static int TotalColeccionables;
+
     // Inicia patrón singleton
     public static ControladorGlobal Instance;
 
@@ -37,10 +43,6 @@ public class ControladorGlobal : MonoBehaviour
         muertesAcumuladas = 0;
         PausarJuego(false);
     }
-
-    [SerializeField] public static int idDelCheckpointActual;
-    [SerializeField] public static bool cambiarCheckpoint;
-    [SerializeField] public int muertesAcumuladas;
 
     // Actualiza el punto de guardado, retorna el ID del anterior punto
     public static int ActivarPuntoDeGuardado(int nuevoId)
@@ -79,4 +81,25 @@ public class ControladorGlobal : MonoBehaviour
     {
         Time.timeScale = Estado ? 0.0f : 1.0f; 
     }
+
+    public void SetFinalizarEscena(bool Estado)
+    {
+        NivelFinalizado = Estado;
+    }
+
+    public bool GetFinalizarEscena()
+    {
+        return NivelFinalizado;
+    }
+
+    public static void SetTotalColeccionables(int total)
+    {
+        TotalColeccionables = total;
+    }
+
+    public static int GetTotalColeccionables()
+    {
+        return TotalColeccionables;
+    }
+
 }

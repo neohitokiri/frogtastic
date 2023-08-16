@@ -23,5 +23,6 @@ public class Puntaje : MonoBehaviour
     public void SumarPuntos(float puntosEntrada)
     {
         puntos += puntosEntrada;
+        ControladorGlobal.Instance.SetFinalizarEscena(puntos == ControladorGlobal.GetTotalColeccionables());
     }
 }
