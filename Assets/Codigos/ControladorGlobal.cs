@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class ControladorGlobal : MonoBehaviour
 {
@@ -34,6 +35,7 @@ public class ControladorGlobal : MonoBehaviour
         ControladorGlobal.idDelCheckpointActual = 0;
         ControladorGlobal.cambiarCheckpoint = false;
         muertesAcumuladas = 0;
+        PausarJuego(false);
     }
 
     [SerializeField] public static int idDelCheckpointActual;
@@ -61,5 +63,20 @@ public class ControladorGlobal : MonoBehaviour
         #else
             Application.Quit();
         #endif
+    }
+
+    public static void ReiniciarEscena()
+    {
+        // Obtén el índice de la escena actual
+        int currentSceneIndex = SceneManager.GetActiveScene().buildIndex;
+
+        // Carga la misma escena por su índice
+        SceneManager.LoadScene(currentSceneIndex);
+        PausarJuego(false);
+    }
+
+    public static void PausarJuego(bool Estado)
+    {
+        Time.timeScale = Estado ? 0.0f : 1.0f; 
     }
 }

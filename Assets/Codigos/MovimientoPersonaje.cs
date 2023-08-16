@@ -26,7 +26,9 @@ public class MovimientoPersonaje : MonoBehaviour
     private AudioSource sonidoSalto;
     private AudioSource sonidoMuerte;
 
+
     [SerializeField] public UnityEngine.Rendering.Universal.Light2D luzGlobal;
+    [SerializeField] public GameObject menuPausa;
 
     private void Start() {
         foreach(Transform child in transform)
@@ -57,7 +59,7 @@ public class MovimientoPersonaje : MonoBehaviour
         float movimientoHorizontal = Input.GetAxis("Horizontal");
         cuerpoRigido.velocity = new Vector2(movimientoHorizontal * velocidadMovimiento, cuerpoRigido.velocity.y);
 
-        if (Input.GetButtonDown("Jump") && (enElSuelo || enElAgua))
+        if ((Input.GetButtonDown("Jump")) && (enElSuelo || enElAgua))
         {
             cuerpoRigido.AddForce(new Vector2(0f, fuerzaSalto), ForceMode2D.Impulse);
             enElSuelo = false;
@@ -65,10 +67,10 @@ public class MovimientoPersonaje : MonoBehaviour
             particulas.Play();
         }
 
-        if (Input.GetKey(KeyCode.Escape))
+        if (Input.GetButtonDown("Cancel"))
         {
-            UnityEngine.SceneManagement.SceneManager.LoadScene(0);
-//            Application.Quit();
+            Time.timeScale = 0;
+            menuPausa.SetActive(true);
         }
 
         if (movimientoHorizontal > 0)
