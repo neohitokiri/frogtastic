@@ -33,14 +33,17 @@ public class MovimientoPersonaje : MonoBehaviour
     private void Start() {
         foreach(Transform child in transform)
         {
-            if (child.gameObject.name == "SonidoSalto")
-                sonidoSalto = child.gameObject.GetComponent<AudioSource>();
-            if (child.gameObject.name == "SonidoMuerte")
-                sonidoMuerte = child.gameObject.GetComponent<AudioSource>();
-            else if (child.gameObject.name == "Particulas")
-                particulas = child.gameObject.GetComponent<ParticleSystem>();
-            else if (child.gameObject.name == "ParticulasMuerte")
-                particulasMuerte = child.gameObject.GetComponent<ParticleSystem>();
+            switch(child.gameObject.name)
+            {
+                case "SonidoSalto":
+                    sonidoSalto = child.gameObject.GetComponent<AudioSource>(); break;
+                case "SonidoMuerte":
+                    sonidoMuerte = child.gameObject.GetComponent<AudioSource>(); break;
+                case "Particulas":
+                    particulas = child.gameObject.GetComponent<ParticleSystem>(); break;
+                case "ParticulasMuerte":
+                particulasMuerte = child.gameObject.GetComponent<ParticleSystem>(); break;
+            }
         }
     }
 

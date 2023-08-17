@@ -10,6 +10,7 @@ TagManager:
   - Coleccionable
   - Agua
   - PlataformaMovil
+  - FInishScene
   layers:
   - Default
   - TransparentFX
