@@ -6,6 +6,7 @@ using TMPro;
 public class Puntaje : MonoBehaviour
 {
     private float puntos;
+    [SerializeField] private float recogidos;
     private TextMeshProUGUI textMesh;
 
     // Start is called before the first frame update
@@ -22,7 +23,8 @@ public class Puntaje : MonoBehaviour
 
     public void SumarPuntos(float puntosEntrada)
     {
-        puntos += puntosEntrada;
-        ControladorGlobal.Instance.SetFinalizarEscena(puntos == ControladorGlobal.GetTotalColeccionables());
+        recogidos += puntosEntrada;
+        puntos = ControladorGlobal.GetTotalColeccionables() - recogidos;
+        ControladorGlobal.Instance.SetFinalizarEscena(puntos < 1.0f);
     }
 }
