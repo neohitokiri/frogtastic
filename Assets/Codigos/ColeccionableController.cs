@@ -12,7 +12,9 @@ public enum TipoDeColeccionable
 public class ColeccionableController : MonoBehaviour
 {
     [SerializeField] private bool collected;
-    [SerializeField] public Puntaje puntaje;
+//    [SerializeField] public Puntaje puntaje;
+
+    [SerializeField] public GameObject GuiPuntaje;
 
     [SerializeField] public Light2D luzCentral;
     [SerializeField] public Light2D luzProyeccion;
@@ -27,6 +29,7 @@ public class ColeccionableController : MonoBehaviour
 //    }
 
     private void Awake() {
+        // arrastrar el objeto GUI del puntaje al campo "puntaje" 
         collected = false;
         sprite = GetComponent<SpriteRenderer>();
         foreach(Transform child in transform)
@@ -38,6 +41,8 @@ public class ColeccionableController : MonoBehaviour
             else if (child.gameObject.name == "Sonido")
                 audioSource = child.gameObject.GetComponent<AudioSource>();
         }
+
+        GuiPuntaje = (GameObject)Resources.Load("prefabs/Elements/Bombillo", typeof(GameObject));
 
         string _antes = "";
         string _despues = "";
@@ -74,7 +79,7 @@ public class ColeccionableController : MonoBehaviour
         if(other.CompareTag("Player")){
             if (!collected)
             {
-                puntaje.SumarPuntos(1.0f);
+//                puntaje.SumarPuntos(1.0f);
 //                Destroy(gameObject);
 //                other.GetComponent<MovimientoPersonaje>().Iluminar();
                 luzCentral.intensity+=0.2f;
@@ -83,6 +88,7 @@ public class ColeccionableController : MonoBehaviour
                 audioSource.Play();
                 collected = true;
                 sprite.sprite = CrearSpriteDeTextura(ImagenDespuesDeTomar);
+                ControladorGlobal.Instance.SetTotalRecogidos();
             }
         }
     }

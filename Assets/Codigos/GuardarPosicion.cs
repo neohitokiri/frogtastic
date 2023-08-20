@@ -29,7 +29,7 @@ public class GuardarPosicion : MonoBehaviour
             {
                 audioSource.Play();
                 other.GetComponent<MovimientoPersonaje>().posicionInicial = transform.position;
-                Debug.Log(ControladorGlobal.ActivarPuntoDeGuardado(light2D.GetInstanceID()));
+                Debug.Log(ControladorGlobal.Instance.ActivarPuntoDeGuardado(light2D.GetInstanceID()));
             }
         }
     }
@@ -37,9 +37,9 @@ public class GuardarPosicion : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (ControladorGlobal.cambiarCheckpoint == true)
+        if (ControladorGlobal.Instance.cambiarCheckpoint == true)
         {
-            Utilizado = ControladorGlobal.idDelCheckpointActual == light2D.GetInstanceID();
+            Utilizado = ControladorGlobal.Instance.idDelCheckpointActual == light2D.GetInstanceID();
             light2D.color = Utilizado ? 
                 Color.green : 
                 Color.red;

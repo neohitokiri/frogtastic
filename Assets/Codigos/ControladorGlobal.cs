@@ -5,11 +5,12 @@ using UnityEngine.SceneManagement;
 
 public class ControladorGlobal : MonoBehaviour
 {
-    [SerializeField] public static int idDelCheckpointActual;
-    [SerializeField] public static bool cambiarCheckpoint;
+    [SerializeField] public int idDelCheckpointActual;
+    [SerializeField] public bool cambiarCheckpoint;
     [SerializeField] public bool NivelFinalizado;
     [SerializeField] public int muertesAcumuladas;
-    [SerializeField] private static int TotalColeccionables;
+    [SerializeField] private int TotalColeccionables;
+    [SerializeField] private int TotalRecogidos;
 
     // Inicia patrón singleton
     public static ControladorGlobal Instance;
@@ -25,7 +26,8 @@ public class ControladorGlobal : MonoBehaviour
         {
             Destroy(gameObject);
         }
-        Debug.Log("Instacia " + ControladorGlobal.Instance.ToString());
+
+        NivelFinalizado = false;
     }
     // Finaliza patrón singleton
 
@@ -34,18 +36,31 @@ public class ControladorGlobal : MonoBehaviour
         muertesAcumuladas++;
     }
 
+    private void Update() {
+        if (!NivelFinalizado && (TotalColeccionables - TotalRecogidos < 1))
+        {
+            NivelFinalizado = true;
+        }
+    }
+
     public void ReiniciarValores()
     {
-        Debug.Log("muertesAcumuladas: " + muertesAcumuladas);
-        Debug.Log("idDelCheckpointActual: " + ControladorGlobal.idDelCheckpointActual);
-        ControladorGlobal.idDelCheckpointActual = 0;
-        ControladorGlobal.cambiarCheckpoint = false;
+        idDelCheckpointActual = 0;
+        cambiarCheckpoint = false;
         muertesAcumuladas = 0;
+        TotalRecogidos = 0;
+        NivelFinalizado = false;
         PausarJuego(false);
     }
 
+    public void ReiniciarMundo()
+    {
+        ReiniciarValores();
+    }
+
+
     // Actualiza el punto de guardado, retorna el ID del anterior punto
-    public static int ActivarPuntoDeGuardado(int nuevoId)
+    public int ActivarPuntoDeGuardado(int nuevoId)
     {
         int paraRetornar = idDelCheckpointActual;        
         if (nuevoId != idDelCheckpointActual)
@@ -57,7 +72,7 @@ public class ControladorGlobal : MonoBehaviour
         return paraRetornar;
     }
 
-    public static void Salir()
+    public void Salir()
     {
         // https://docs.unity3d.com/Manual/PlatformDependentCompilation.html
         #if UNITY_EDITOR || UNITY_EDITOR_WIN || UNITY_EDITOR_OSX || UNITY_EDITOR_LINUX
@@ -67,17 +82,18 @@ public class ControladorGlobal : MonoBehaviour
         #endif
     }
 
-    public static void ReiniciarEscena()
+    public void ReiniciarEscena()
     {
         // Obtén el índice de la escena actual
         int currentSceneIndex = SceneManager.GetActiveScene().buildIndex;
+        NivelFinalizado = false;
 
         // Carga la misma escena por su índice
         SceneManager.LoadScene(currentSceneIndex);
         PausarJuego(false);
     }
 
-    public static void PausarJuego(bool Estado)
+    public void PausarJuego(bool Estado)
     {
         Time.timeScale = Estado ? 0.0f : 1.0f; 
     }
@@ -92,14 +108,29 @@ public class ControladorGlobal : MonoBehaviour
         return NivelFinalizado;
     }
 
-    public static void SetTotalColeccionables(int total)
+    public void SetTotalColeccionables(int total)
     {
         TotalColeccionables = total;
     }
 
-    public static int GetTotalColeccionables()
+    public int GetTotalColeccionables()
     {
         return TotalColeccionables;
     }
 
+    public void SetTotalRecogidos(int total = -99)
+    {
+        TotalRecogidos = total == -99 ? TotalRecogidos + 1 : total;
+    }
+
+    public int GetTotalRecogidos()
+    {
+        return TotalRecogidos;
+    }
+
+    public void CambiarNivel(int IdEscena)
+    {
+        ReiniciarValores();
+        SceneManager.LoadScene(IdEscena);
+    }
 }

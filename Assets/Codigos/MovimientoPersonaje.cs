@@ -45,16 +45,24 @@ public class MovimientoPersonaje : MonoBehaviour
                 particulasMuerte = child.gameObject.GetComponent<ParticleSystem>(); break;
             }
         }
-    }
 
-    void Awake()
-    {
         intensidadMaximaDeLaLuz = 2.0f;
         intensidadMinimaDeLaLuz = 0.2f;
         cuerpoRigido = GetComponent<Rigidbody2D>();   
         animaciones = GetComponent<Animator>();
         posicionInicial = transform.position;
-        ControladorGlobal.SetTotalColeccionables(GameObject.FindGameObjectsWithTag("Coleccionable").Length);
+
+        ControladorGlobal.Instance.SetTotalColeccionables(GameObject.FindGameObjectsWithTag("Coleccionable").Length);
+    }
+
+    void Awake()
+    {
+//        intensidadMaximaDeLaLuz = 2.0f;
+//        intensidadMinimaDeLaLuz = 0.2f;
+//        cuerpoRigido = GetComponent<Rigidbody2D>();   
+//        animaciones = GetComponent<Animator>();
+//        posicionInicial = transform.position;
+//        ControladorGlobal.Instance.SetTotalColeccionables(GameObject.FindGameObjectsWithTag("Coleccionable").Length);
     }
 
     void Update()

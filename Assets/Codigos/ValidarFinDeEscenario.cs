@@ -8,7 +8,7 @@ public class ValidarFinDeEscenario : MonoBehaviour
     [SerializeField] private Animator animaciones;
     [SerializeField] private GameObject efectos;
 
-    private void Awake() {
+    private void Start() {
         animaciones = GetComponent<Animator>();
 
         foreach(Transform child in transform)
@@ -20,15 +20,15 @@ public class ValidarFinDeEscenario : MonoBehaviour
 
     void Update()
     {
-        efectos.SetActive(ControladorGlobal.Instance.NivelFinalizado);
-        animaciones.speed = ControladorGlobal.Instance.NivelFinalizado ? 1.0f: 0.0f;
+        efectos.SetActive(ControladorGlobal.Instance.GetFinalizarEscena());
+        animaciones.speed = ControladorGlobal.Instance.GetFinalizarEscena() ? 1.0f: 0.0f;
     }
 
     private void OnTriggerEnter2D(Collider2D other)
     {
-        if (other.gameObject.tag == "Player" && ControladorGlobal.Instance.NivelFinalizado)
+        if (other.gameObject.tag == "Player" && ControladorGlobal.Instance.GetFinalizarEscena())
         {
-            SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
+            ControladorGlobal.Instance.CambiarNivel(SceneManager.GetActiveScene().buildIndex + 1);
         }
     }
 }
