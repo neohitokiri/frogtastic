@@ -48,7 +48,7 @@ public class MovimientoPersonaje : MonoBehaviour
 
         intensidadMaximaDeLaLuz = 2.0f;
         intensidadMinimaDeLaLuz = 0.2f;
-        cuerpoRigido = GetComponent<Rigidbody2D>();   
+        cuerpoRigido = GetComponent<Rigidbody2D>();
         animaciones = GetComponent<Animator>();
         posicionInicial = transform.position;
 

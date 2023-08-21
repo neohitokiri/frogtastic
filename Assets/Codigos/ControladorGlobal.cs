@@ -11,6 +11,8 @@ public class ControladorGlobal : MonoBehaviour
     [SerializeField] public int muertesAcumuladas;
     [SerializeField] private int TotalColeccionables;
     [SerializeField] private int TotalRecogidos;
+    [SerializeField] [Range(0.0f, 1.0f)]public float VolumenGlobalDeLaMusica;
+    [SerializeField] [Range(0.0f, 1.0f)]public float VolumenGlobalDeLosSFX;
 
     // Inicia patrón singleton
     public static ControladorGlobal Instance;
@@ -31,16 +33,49 @@ public class ControladorGlobal : MonoBehaviour
     }
     // Finaliza patrón singleton
 
+    private void OnValidate() {
+        NormalizarVolumen();
+    }
+
+    private void NormalizarVolumen()
+    {
+        // Obtén la cantidad de escenas en la build
+        int sceneCount = SceneManager.sceneCount;
+
+        // Itera a través de todas las escenas
+        for (int i = 0; i < sceneCount; i++)
+        {
+            // Obtiene la escena en la posición "i"
+            Scene scene = SceneManager.GetSceneAt(i);
+
+            // Encuentra todos los objetos AudioSource en la escena actual
+            GameObject[] rootObjects = scene.GetRootGameObjects();
+            foreach (GameObject rootObject in rootObjects)
+            {
+                AudioSource[] audioSources = rootObject.GetComponentsInChildren<AudioSource>(true);
+
+                // Itera a través de los AudioSources en el objeto actual
+                foreach (AudioSource audioSource in audioSources)
+                {
+                    // Verifica si el objeto tiene la etiqueta "Musica"
+                    audioSource.volume = audioSource.gameObject.CompareTag("Musica") ? VolumenGlobalDeLaMusica : VolumenGlobalDeLosSFX;
+                    Debug.Log("Encontré un AudioSource de música en el objeto: " + audioSource.gameObject.name + " y le asigné el volumen " + audioSource.volume.ToString());
+                }
+            }
+        }
+    }
+
     public void IncrementarMuertes()
     {
         muertesAcumuladas++;
     }
 
     private void Update() {
-        if (!NivelFinalizado && (TotalColeccionables - TotalRecogidos < 1))
-        {
-            NivelFinalizado = true;
-        }
+        NivelFinalizado = (TotalColeccionables - TotalRecogidos < 1);
+//        if (!NivelFinalizado && (TotalColeccionables - TotalRecogidos < 1))
+//        {
+//            NivelFinalizado = true;
+//        }
     }
 
     public void ReiniciarValores()
@@ -51,6 +86,7 @@ public class ControladorGlobal : MonoBehaviour
         TotalRecogidos = 0;
         NivelFinalizado = false;
         PausarJuego(false);
+        NormalizarVolumen();
     }
 
     public void ReiniciarMundo()
@@ -91,6 +127,7 @@ public class ControladorGlobal : MonoBehaviour
         // Carga la misma escena por su índice
         SceneManager.LoadScene(currentSceneIndex);
         PausarJuego(false);
+        NormalizarVolumen();
     }
 
     public void PausarJuego(bool Estado)
@@ -130,7 +167,43 @@ public class ControladorGlobal : MonoBehaviour
 
     public void CambiarNivel(int IdEscena)
     {
-        ReiniciarValores();
-        SceneManager.LoadScene(IdEscena);
+        StartCoroutine(CambiarNivelAsincronamente(IdEscena));
     }
+
+    public IEnumerator CambiarNivelAsincronamente(int IdEscena)
+    {
+        // Carga la escena asíncronamente
+        AsyncOperation asyncLoad = SceneManager.LoadSceneAsync(IdEscena);
+        Debug.Log("CARGANDO ESCENA " + IdEscena.ToString());
+        // Espera hasta que la carga esté completa
+        while (!asyncLoad.isDone)
+        {
+            yield return null;
+        }
+
+        // Ahora todos los recursos se han cargado, ejecuta la función
+        ReiniciarValores();
+//        SceneManager.LoadScene(IdEscena);
+    }
+
+    public void SetVolumenMusica(float Volumen)
+    {
+        VolumenGlobalDeLaMusica = Volumen;
+    }
+
+    public float GetVolumenMusica()
+    {
+        return VolumenGlobalDeLaMusica;
+    }
+
+    public void SetVolumenSFX(float Volumen)
+    {
+        VolumenGlobalDeLosSFX = Volumen;
+    }
+
+    public float GetVolumenSFX()
+    {
+        return VolumenGlobalDeLosSFX;
+    }
+
 }

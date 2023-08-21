@@ -58,7 +58,6 @@ private void Start() {
 
     public void DestroyAllChildren()
     {
-
         var tempList = transform.Cast<Transform>().ToList();
         foreach (var child in tempList)
         {
