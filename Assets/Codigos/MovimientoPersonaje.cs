@@ -67,13 +67,17 @@ public class MovimientoPersonaje : MonoBehaviour
 
     void Update()
     {
-        float movimientoHorizontal = Input.GetAxis("Horizontal");
+        float direccionPorTouch = ControladorGlobal.Instance.DireccionEnControlTactil();
+
+        float movimientoHorizontal = direccionPorTouch != 0 ? direccionPorTouch : Input.GetAxis("Horizontal");
+
         cuerpoRigido.velocity = new Vector2(movimientoHorizontal * velocidadMovimiento, cuerpoRigido.velocity.y);
 
-        if ((Input.GetButtonDown("Jump")) && (enElSuelo || enElAgua))
+        if ((Input.GetButtonDown("Jump") || ControladorGlobal.Instance.BotonSaltoTactilEstaPresionado) && (enElSuelo || enElAgua))
         {
-            cuerpoRigido.AddForce(new Vector2(0f, fuerzaSalto), ForceMode2D.Impulse);
+            ControladorGlobal.Instance.BotonSaltoTactilEstaPresionado = false;
             enElSuelo = false;
+            cuerpoRigido.AddForce(new Vector2(0f, fuerzaSalto), ForceMode2D.Impulse);
             sonidoSalto.Play();
             particulas.Play();
         }

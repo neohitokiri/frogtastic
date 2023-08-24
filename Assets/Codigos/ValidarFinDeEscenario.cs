@@ -7,6 +7,7 @@ public class ValidarFinDeEscenario : MonoBehaviour
 {
     [SerializeField] private Animator animaciones;
     [SerializeField] private GameObject efectos;
+    [SerializeField] private GameObject controlesTouch;
 
     private void Start() {
         animaciones = GetComponent<Animator>();
@@ -16,6 +17,23 @@ public class ValidarFinDeEscenario : MonoBehaviour
             if (child.gameObject.name == "Efectos")
                 efectos = child.gameObject;
         }
+
+        controlesTouch = GameObject.Find("ControlesTouch");
+        if (controlesTouch != null)
+        {
+            Debug.Log("Existen controles touch");
+            #if UNITY_ANDROID || UNITY_IOS
+            controlesTouch.SetActive(true);
+            #else
+            controlesTouch.SetActive(false);
+            #endif
+        }
+        else
+        {
+            Debug.Log("No hay controles touch");
+        }
+
+
     }
 
     void Update()

@@ -12,6 +12,7 @@ TagManager:
   - PlataformaMovil
   - FInishScene
   - Musica
+  - ControlesTouch
   layers:
   - Default
   - TransparentFX

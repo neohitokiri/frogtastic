@@ -1489,6 +1489,9 @@ MonoBehaviour:
   muertesAcumuladas: 0
   TotalColeccionables: 0
   TotalRecogidos: 0
+  BotonIzquierdoTactilEstaPresionado: 0
+  BotonDerechoTactilEstaPresionado: 0
+  BotonSaltoTactilEstaPresionado: 0
 --- !u!4 &868148047
 Transform:
   m_ObjectHideFlags: 0

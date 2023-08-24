@@ -12,6 +12,11 @@ public class ControladorGlobal : MonoBehaviour
     [SerializeField] private int TotalColeccionables;
     [SerializeField] private int TotalRecogidos;
 
+    [SerializeField] public bool BotonIzquierdoTactilEstaPresionado;
+    [SerializeField] public bool BotonDerechoTactilEstaPresionado;
+    [SerializeField] public bool BotonSaltoTactilEstaPresionado;
+
+
     // Inicia patrón singleton
     public static ControladorGlobal Instance;
 
@@ -85,8 +90,8 @@ public class ControladorGlobal : MonoBehaviour
         NivelFinalizado = false;
 
         // Carga la misma escena por su índice
-        SceneManager.LoadScene(currentSceneIndex);
         PausarJuego(false);
+        SceneManager.LoadScene(currentSceneIndex);
     }
 
     public void PausarJuego(bool Estado)
@@ -128,5 +133,23 @@ public class ControladorGlobal : MonoBehaviour
     {
         ReiniciarValores();
         SceneManager.LoadScene(IdEscena);
+    }
+
+    public int DireccionEnControlTactil()
+    {
+        int retornar = 0;
+        if (BotonIzquierdoTactilEstaPresionado && BotonDerechoTactilEstaPresionado)
+        {
+            retornar = 0;
+        }
+        else
+        {
+            if (BotonIzquierdoTactilEstaPresionado)
+                retornar = -1;
+            else if (BotonDerechoTactilEstaPresionado)
+                retornar = 1;
+        }
+
+        return retornar;
     }
 }
