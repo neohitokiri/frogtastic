@@ -90,7 +90,8 @@ public class ControladorGlobal : MonoBehaviour
         NivelFinalizado = false;
 
         // Carga la misma escena por su índice
-        PausarJuego(false);
+        ReiniciarValores();
+
         SceneManager.LoadScene(currentSceneIndex);
     }
 

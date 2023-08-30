@@ -112,7 +112,7 @@ public class MovimientoPersonaje : MonoBehaviour
         }
 
         if (collision.gameObject.CompareTag("Morir"))
-            Reinicio();
+            Morir();
     }
 
     private void OnCollisionExit2D(Collision2D other) {
@@ -139,7 +139,7 @@ public class MovimientoPersonaje : MonoBehaviour
         };
     }
 
-    void Reinicio()
+    void Morir()
     {
         sonidoMuerte.Play();
         transform.position = posicionInicial;
@@ -152,7 +152,6 @@ public class MovimientoPersonaje : MonoBehaviour
 
         cuerpoRigido.bodyType = RigidbodyType2D.Dynamic;
         ControladorGlobal.Instance.IncrementarMuertes();
-//        muertesAcumuladas++;
         Debug.Log(ControladorGlobal.Instance.muertesAcumuladas);
     }
 

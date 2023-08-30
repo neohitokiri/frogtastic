@@ -5130,8 +5130,8 @@ CapsuleCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0, y: -0.08}
-  m_Size: {x: 0.76, y: 0.76}
+  m_Offset: {x: 0.013474405, y: -0.09347436}
+  m_Size: {x: 0.5867578, y: 0.78694874}
   m_Direction: 0
 --- !u!50 &5791354100108125451
 Rigidbody2D:
@@ -5152,7 +5152,7 @@ Rigidbody2D:
   m_Material: {fileID: 0}
   m_Interpolate: 0
   m_SleepingMode: 1
-  m_CollisionDetection: 0
+  m_CollisionDetection: 1
   m_Constraints: 4
 --- !u!95 &5791354100108125455
 Animator:
@@ -5192,14 +5192,12 @@ MonoBehaviour:
   fuerzaSalto: 12
   enElSuelo: 0
   enElAgua: 0
-  muertesAcumuladas: 0
-  puntosAcumulados: 0
-  puntosDesplegados: 0
   intensidadMaximaDeLaLuz: 0
   intensidadMinimaDeLaLuz: 0
   particulas: {fileID: 1450714722670826430}
   particulasMuerte: {fileID: 3986877360388275678}
   luzGlobal: {fileID: 0}
+  menuPausa: {fileID: 0}
 --- !u!81 &-4647920036916413487
 AudioListener:
   m_ObjectHideFlags: 0
@@ -5249,7 +5247,7 @@ MonoBehaviour:
   - {x: -0.1026721, y: -0.4951086, z: 0}
   m_ShapePathHash: -181906473
   m_Mesh: {fileID: 0}
-  m_InstanceId: 45220
+  m_InstanceId: 42546
   m_LocalBounds:
     m_Center: {x: -0.004727125, y: -0.120761156, z: 0}
     m_Extent: {x: 0.34468675, y: 0.37434745, z: 0}
